@@ -3,41 +3,38 @@
 \* PatternPatternSilenceTransitionState.advance  (Machine/PatternPatternSilenceTransition.ts)
 \* ---------------------------------------------------------------------------
 EXTENDS Base,
+        States,
         PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern,
         PatternPlaybackAtItsLastPlayWithScheduledLongFadeout,
-        IncomingPatternFadingIn,
-        PatternSilenceTransitionState,
-        PatternPatternPatternTransitionState,
-        PatternPatternSilenceTransitionState,
-        Defect
+        IncomingPatternFadingIn
 
 \* Machine/PatternPatternSilenceTransition.ts: PatternPatternSilenceTransitionQueue.
 expectedElementKinds ==
   << Element.PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern,
      Element.PatternPlaybackAtItsLastPlayWithScheduledLongFadeout >>
 
-is(s) == isInState(PatternPatternSilenceTransitionTag, s)
+models(s) == isInState(PatternPatternSilenceTransitionState!Tag, s)
 
 transitionQueueShapesMatchTag ==
-  is(state) =>
+  models(state) =>
     transitionQueueMatchesShape(state, expectedElementKinds)
 
 onStrength(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ pressedParamButtonId.kind = EventKinds.strength
   /\ state' =
-       PatternPatternSilenceTransitionState(state.transitionQueue, state.chord, pressedParamButtonId.value)
+       PatternPatternSilenceTransitionState!make(state.transitionQueue, state.chord, pressedParamButtonId.value)
 
 onChord_EffectDie(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ pressedParamButtonId.kind = EventKinds.chord
-  /\ state' = Defect
+  /\ state' = DefectState!make
 
 onPattern(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ pressedParamButtonId.kind = EventKinds.pattern
   /\ state' =
-       PatternPatternPatternTransitionState(<< state.transitionQueue[1],
+       PatternPatternPatternTransitionState!make(<< state.transitionQueue[1],
             PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern(state.transitionQueue[
                 2
               ].asset),
@@ -46,9 +43,9 @@ onPattern(pressedParamButtonId) ==
 
 getNewCleanedUpState(cleanupEvent) ==
   /\ cleanupEvent.kind = EventKinds.cleanup
-  /\ is(state)
+  /\ models(state)
   /\ state' =
-       PatternSilenceTransitionState(<< PatternPlaybackAtItsLastPlayWithScheduledLongFadeout(state.transitionQueue[
+       PatternSilenceTransitionState!make(<< PatternPlaybackAtItsLastPlayWithScheduledLongFadeout(state.transitionQueue[
                 2
               ].asset)
          >>)

@@ -3,8 +3,8 @@
 \* Machine/Pattern.tla holds the branches that produce it.
 EXTENDS Base
 
-PatternTag == "PatternState"
+Tag == "PatternState"
 
-PatternState(transitionQueue) ==
-  StateRecord(PatternTag, transitionQueue, noStoredSelection, noStoredSelection)
+make(transitionQueue) ==
+  StateRecord(Tag, transitionQueue, noStoredSelection, noStoredSelection)
 ====

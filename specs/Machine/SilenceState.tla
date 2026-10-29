@@ -3,8 +3,8 @@
 \* Machine/Silence.tla holds the branches that produce it.
 EXTENDS Base
 
-SilenceTag == "SilenceState"
+Tag == "SilenceState"
 
-SilenceState(chord, strength) ==
-  StateRecord(SilenceTag, <<>>, chord, strength)
+make(chord, strength) ==
+  StateRecord(Tag, <<>>, chord, strength)
 ====

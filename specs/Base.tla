@@ -47,7 +47,13 @@ Strengths == { "s1", "s2", "s3" }
 \* silently comparing false the way a misspelled literal would.
 \*
 \* State tags are also strings, but each one lives with its state variant:
-\* Machine/<X>State.tla exports <X>Tag next to the constructor that stamps it.
+\* Machine/<X>State.tla exports `Tag` next to the `make` constructor that stamps
+\* it. Machine/States.tla instantiates every state variant once, and a branch
+\* file `EXTENDS States` to reach them as `XState!Tag`, `XState!make(...)`.
+\* The bare names are short on purpose: the instance supplies the namespace, so
+\* two variants can both export `Tag`/`make` without colliding. (`EXTENDS` of the
+\* state modules themselves would flatten them into one namespace, which is what
+\* the old `<X>Tag` prefixes were working around.)
 \* ---------------------------------------------------------------------------
 Element ==
   [ PatternPlayback |-> "PatternPlayback",
@@ -127,10 +133,10 @@ makePatchedFrom(asset, pressedParamButtonId) ==
   [asset EXCEPT !.chord = pressedParamButtonId.value]
   [] OTHER-> [asset EXCEPT !.strength = pressedParamButtonId.value]
 
+
 \* Queue elements. `kind` is the element class, spelled exactly like the class in
 \* Elements/, and `asset` is what it wraps. The constructors themselves are one
 \* per file in Elements/.
-
 StateRecord(tag, transitionQueue, chord, strength) ==
   [ tag |-> tag,
     transitionQueue |-> transitionQueue,
@@ -143,23 +149,25 @@ StateRecord(tag, transitionQueue, chord, strength) ==
 noStoredSelection == "noStoredSelection"
 
 \* The one way to ask "is this state in that variant?". Each Machine/<X>State.tla
-\* exports <X>Tag, each branch file binds it once as `is(s)`, and nothing else
-\* compares `state.tag` by hand.
+\* exports `Tag`, each branch file binds it once as `models(s)` through the
+\* instance from States -- `isInState(PatternSilenceTransitionState!Tag, s)` --
+\* and nothing else compares `state.tag` by hand.
 isInState(tag, s) == s.tag = tag
 
-\* `StateRecord` is the one place the record shape is written down. Each state
-\* variant's constructor lives in Machine/<State>State.tla, so a caller never
-\* spells the tag or a field the variant does not store. TLA+ modules cannot
-\* depend on each other in a cycle — and the branches do (Pattern →
-\* PatternSilenceTransition → Pattern) — which is why a constructor cannot share
-\* a file with the branches the way the TS classes do.
 
+\* `StateRecord` is the one place the record shape is written down. Each state
+\* variant's constructor lives in Machine/<State>State.tla and is called `make`,
+\* so every callsite reads `<State>!make(...)` and a caller never spells the tag
+\* or a field the variant does not store. TLA+ modules cannot depend on each
+\* other in a cycle — and the branches do (Pattern → PatternSilenceTransition →
+\* Pattern) — which is why a constructor cannot share a file with the branches the
+\* way the TS classes do.
 VARIABLE state
 
 \* A Machine/ file's Schema.Tuple, restated as a property instead of a type. The
 \* tuple itself lives in that state's file; only the shape of the check is shared.
 transitionQueueMatchesShape(s, expectedElementKinds) ==
   /\ Len(s.transitionQueue) = Len(expectedElementKinds)
-  /\ \A i \in 1..Len(s.transitionQueue) :
+  /\ \A i \in 1 .. Len(s.transitionQueue):
        s.transitionQueue[i].kind = expectedElementKinds[i]
 ====

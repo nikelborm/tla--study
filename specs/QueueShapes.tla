@@ -36,28 +36,31 @@
 
   Run it:  ./run-tlc.sh specs/QueueShapes.tla -config specs/QueueShapes.cfg
 *)
-EXTENDS Naturals, Sequences, TLC, Base, SilenceState, Defect
+EXTENDS Naturals, Sequences, TLC, Base, States
 
-\* One instance per Machine/ file. The instance name is the namespace: that is
-\* what lets Machine/Silence.tla call its branches `onPattern` instead of
-\* `SilenceState_onPattern`. No Machine/ file declares a variable of its own --
-\* they all EXTEND Base, so every instance binds the same `state`.
+\* One instance per branch module. State variants live in Machine/States.tla and
+\* arrive here through `EXTENDS States`; their instance names are the namespace,
+\* which is what lets the branch files call a tag `Tag` and a constructor `make`
+\* instead of `<State>Tag` and `<State>(...)`. No Machine/ file declares a
+\* variable of its own -- they all EXTEND Base, so every instance binds the same
+\* `state`.
 Silence == INSTANCE Silence
 Pattern == INSTANCE Pattern
 SlowStrum == INSTANCE SlowStrum
+Defect == INSTANCE Defect
 PatternPatternTransition == INSTANCE PatternPatternTransition
 PatternSilencePatternTransition == INSTANCE PatternSilencePatternTransition
 PatternPatternPatternTransition == INSTANCE PatternPatternPatternTransition
 PatternSilenceTransition == INSTANCE PatternSilenceTransition
 PatternPatternSilenceTransition == INSTANCE PatternPatternSilenceTransition
 
-Init == state = SilenceState(InitialSelection.chord, InitialSelection.strength)
+Init == state = SilenceState!make(InitialSelection.chord, InitialSelection.strength)
 
 \* The machine is dead: the fiber is gone and the SubscriptionRef is never updated
 \* again, so it stutters forever. Death is a tag, not a flag, which is why every
 \* `advance` branch disables itself the moment it happens: none of them match it.
 StuttersAfterEffectDie ==
-  /\ isDefect(state)
+  /\ Defect!models(state)
   /\ UNCHANGED state
 
 
@@ -132,7 +135,7 @@ Spec == Init /\ [][Next]_state
 \* "The machine never dies." Almost certainly FALSE for the current code — it is
 \* here as a question, not as a claim. Uncomment it in a config to make TLC give
 \* you the shortest input sequence that kills the playback.
-NeverReachedEffectDie == ~isDefect(state)
+NeverReachedEffectDie == ~Defect!models(state)
 
 \* "At most one element of the queue is fading in at any moment." True by
 \* construction here; it is in the default config as the worked example of how
@@ -145,9 +148,7 @@ AtMostOneIncomingPatternFadingIn ==
 
 \* Each Machine/ file owns the Schema.Tuple of its state: "if the machine is in
 \* my state, my queue holds exactly these kinds". The root only asks every state
-\* to answer, the same way `Next` asks every state for its branches. `Defect` has
-\* no branch file to hang the predicate on, so its one-liner is the same check,
-\* inlined.
+\* to answer, the same way `Next` asks every state for its branches.
 TransitionQueueShapesMatchTags ==
   /\ Silence!transitionQueueShapesMatchTag
   /\ Pattern!transitionQueueShapesMatchTag
@@ -157,7 +158,7 @@ TransitionQueueShapesMatchTags ==
   /\ PatternPatternPatternTransition!transitionQueueShapesMatchTag
   /\ PatternSilenceTransition!transitionQueueShapesMatchTag
   /\ PatternPatternSilenceTransition!transitionQueueShapesMatchTag
-  /\ isDefect(state) => transitionQueueMatchesShape(state, <<>>)
+  /\ Defect!transitionQueueShapesMatchTag
 
 \* No reachable state ever needs a 4th queue slot.
 TransitionQueueNeverExceedsThree == Len(state.transitionQueue) <= 3
@@ -167,7 +168,7 @@ TransitionQueueNeverExceedsThree == Len(state.transitionQueue) <= 3
 \* has. `inferSelection` reads these fields, so a mismatch means the UI reports
 \* one asset while another one is being scheduled.
 StoredSelectionMatchesTheDestinationPlayback ==
-  PatternPatternSilenceTransition!is(state) =>
+  PatternPatternSilenceTransition!models(state) =>
     /\ state.chord    = state.transitionQueue[2].asset.chord
     /\ state.strength = state.transitionQueue[2].asset.strength
 
@@ -180,7 +181,7 @@ StoredSelectionMatchesTheDestinationPlayback ==
 \* This is exactly the layout a 2-values-per-dimension model cannot even write
 \* down. See README §4d.
 FullTransitionQueueWithThreeDistinctPatterns ==
-  /\ PatternPatternPatternTransition!is(state)
+  /\ PatternPatternPatternTransition!models(state)
   /\ state.transitionQueue[1].asset.pattern #
        state.transitionQueue[2].asset.pattern
   /\ state.transitionQueue[1].asset.pattern #

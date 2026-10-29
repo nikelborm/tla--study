@@ -2,36 +2,36 @@
 \* ---------------------------------------------------------------------------
 \* SilenceState.advance  (Machine/Silence🏁.ts)
 \* ---------------------------------------------------------------------------
-EXTENDS Base, PatternPlayback, SilenceState, PatternState, SlowStrumState
+EXTENDS Base, States, PatternPlayback
 
 \* Machine/Silence🏁.ts: SilenceQueue = Schema.Tuple([]).
 expectedElementKinds == <<>>
 
-is(s) == isInState(SilenceTag, s)
+models(s) == isInState(SilenceState!Tag, s)
 
 transitionQueueShapesMatchTag ==
-  is(state) => transitionQueueMatchesShape(state, expectedElementKinds)
+  models(state) => transitionQueueMatchesShape(state, expectedElementKinds)
 
 onPattern(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ pressedParamButtonId.kind = EventKinds.pattern
   /\ state' =
-       PatternState(<< PatternPlayback(TaggedPatternPointer_makeSimple(pressedParamButtonId.value, state.chord, state.strength))
+       PatternState!make(<< PatternPlayback(TaggedPatternPointer_makeSimple(pressedParamButtonId.value, state.chord, state.strength))
          >>)
 
 onChord(pressedParamButtonId) ==
   /\ SlowStrums
-  /\ is(state)
+  /\ models(state)
   /\ pressedParamButtonId.kind = EventKinds.chord
-  /\ state' = SlowStrumState(pressedParamButtonId.value, state.strength)
+  /\ state' = SlowStrumState!make(pressedParamButtonId.value, state.strength)
 
 onStrength(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ pressedParamButtonId.kind = EventKinds.strength
-  /\ state' = SilenceState(state.chord, pressedParamButtonId.value)
+  /\ state' = SilenceState!make(state.chord, pressedParamButtonId.value)
 
 getNewCleanedUpState(cleanupEvent) ==
   /\ cleanupEvent.kind = EventKinds.cleanup
-  /\ is(state)
+  /\ models(state)
   /\ UNCHANGED state
 ====

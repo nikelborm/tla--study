@@ -4,8 +4,8 @@
 \* branches that produce it.
 EXTENDS Base
 
-PatternPatternPatternTransitionTag == "PatternPatternPatternTransitionState"
+Tag == "PatternPatternPatternTransitionState"
 
-PatternPatternPatternTransitionState(transitionQueue) ==
-  StateRecord(PatternPatternPatternTransitionTag, transitionQueue, noStoredSelection, noStoredSelection)
+make(transitionQueue) ==
+  StateRecord(Tag, transitionQueue, noStoredSelection, noStoredSelection)
 ====

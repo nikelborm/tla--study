@@ -8,70 +8,66 @@
 \* model may take either.
 \* ---------------------------------------------------------------------------
 EXTENDS Base,
+        States,
         PatternPlayback,
         PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern,
         PatternPlaybackAtItsLastPlayWithScheduledLongFadeout,
-        IncomingPatternFadingIn,
-        PatternState,
-        PatternPatternTransitionState,
-        PatternSilenceTransitionState,
-        PatternPatternPatternTransitionState,
-        PatternPatternSilenceTransitionState
+        IncomingPatternFadingIn
 
 \* Machine/PatternPatternTransition⏳.ts: PatternPatternTransitionQueue.
 expectedElementKinds ==
   << Element.PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern,
      Element.IncomingPatternFadingIn >>
 
-is(s) == isInState(PatternPatternTransitionTag, s)
+models(s) == isInState(PatternPatternTransitionState!Tag, s)
 
 transitionQueueShapesMatchTag ==
-  is(state) =>
+  models(state) =>
     transitionQueueMatchesShape(state, expectedElementKinds)
 
 theSameChordOrStrengthWasPressed(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ isTheSameChordOrStrength(pressedParamButtonId, state.transitionQueue[
          2
        ].asset)
   /\ UNCHANGED state
 
 whenFadingOutPlaybackIsStillSafeToRevive_onPressedThePatternOfTheIncomingOne(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ isTheSamePattern(pressedParamButtonId, state.transitionQueue[2].asset)
   /\ state' =
-       PatternSilenceTransitionState(<< PatternPlaybackAtItsLastPlayWithScheduledLongFadeout(state.transitionQueue[
+       PatternSilenceTransitionState!make(<< PatternPlaybackAtItsLastPlayWithScheduledLongFadeout(state.transitionQueue[
                 1
               ].asset)
          >>)
 
 whenFadingOutPlaybackIsStillSafeToRevive_onFadingOutAssetBroughtBack(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ thePressChangesTheSoundingAsset(pressedParamButtonId, state.transitionQueue[
          2
        ].asset)
   /\ makePatchedFrom(state.transitionQueue[2].asset, pressedParamButtonId) =
        state.transitionQueue[1].asset
   /\ state' =
-       PatternState(<< PatternPlayback(state.transitionQueue[1].asset) >>)
+       PatternState!make(<< PatternPlayback(state.transitionQueue[1].asset) >>)
 
 whenFadingOutPlaybackIsStillSafeToRevive_onPressedAnyOtherPattern(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ thePressChangesTheSoundingAsset(pressedParamButtonId, state.transitionQueue[
          2
        ].asset)
   /\ makePatchedFrom(state.transitionQueue[2].asset, pressedParamButtonId) #
        state.transitionQueue[1].asset
   /\ state' =
-       PatternPatternTransitionState(<< state.transitionQueue[1],
+       PatternPatternTransitionState!make(<< state.transitionQueue[1],
             IncomingPatternFadingIn(makePatchedFrom(state.transitionQueue[2].asset, pressedParamButtonId))
          >>)
 
 whenFadingOutPlaybackIsUnsafeToRevive_onPressedThePatternOfTheIncomingOne(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ isTheSamePattern(pressedParamButtonId, state.transitionQueue[2].asset)
   /\ state' =
-       PatternPatternSilenceTransitionState(<< state.transitionQueue[1],
+       PatternPatternSilenceTransitionState!make(<< state.transitionQueue[1],
             PatternPlaybackAtItsLastPlayWithScheduledLongFadeout(state.transitionQueue[
                 2
               ].asset)
@@ -80,12 +76,12 @@ whenFadingOutPlaybackIsUnsafeToRevive_onPressedThePatternOfTheIncomingOne(presse
          ].asset.strength)
 
 whenFadingOutPlaybackIsUnsafeToRevive_onPressedAnyOtherPattern(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ thePressChangesTheSoundingAsset(pressedParamButtonId, state.transitionQueue[
          2
        ].asset)
   /\ state' =
-       PatternPatternPatternTransitionState(<< state.transitionQueue[1],
+       PatternPatternPatternTransitionState!make(<< state.transitionQueue[1],
             PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern(state.transitionQueue[
                 2
               ].asset),
@@ -94,7 +90,7 @@ whenFadingOutPlaybackIsUnsafeToRevive_onPressedAnyOtherPattern(pressedParamButto
 
 getNewCleanedUpState(cleanupEvent) ==
   /\ cleanupEvent.kind = EventKinds.cleanup
-  /\ is(state)
+  /\ models(state)
   /\ state' =
-       PatternState(<< PatternPlayback(state.transitionQueue[2].asset) >>)
+       PatternState!make(<< PatternPlayback(state.transitionQueue[2].asset) >>)
 ====

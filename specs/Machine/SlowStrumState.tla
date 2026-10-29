@@ -3,8 +3,8 @@
 \* Machine/SlowStrum.tla holds the branches that produce it.
 EXTENDS Base
 
-SlowStrumTag == "SlowStrumState"
+Tag == "SlowStrumState"
 
-SlowStrumState(chord, strength) ==
-  StateRecord(SlowStrumTag, <<>>, chord, strength)
+make(chord, strength) ==
+  StateRecord(Tag, <<>>, chord, strength)
 ====

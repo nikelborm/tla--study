@@ -2,11 +2,9 @@
 \* ---------------------------------------------------------------------------
 \* PatternPatternPatternTransitionState.advance  (Machine/PatternPatternPatternTransition.ts)
 \* ---------------------------------------------------------------------------
-EXTENDS Base, IncomingPatternFadingIn,
-        PatternPatternTransitionState,
-        PatternPatternPatternTransitionState,
-        PatternPatternSilenceTransitionState,
-        Defect
+EXTENDS Base,
+        States,
+        IncomingPatternFadingIn
 
 \* Machine/PatternPatternPatternTransition.ts: PatternPatternPatternTransitionQueue.
 expectedElementKinds ==
@@ -14,14 +12,14 @@ expectedElementKinds ==
      Element.PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern,
      Element.IncomingPatternFadingIn >>
 
-is(s) == isInState(PatternPatternPatternTransitionTag, s)
+models(s) == isInState(PatternPatternPatternTransitionState!Tag, s)
 
 transitionQueueShapesMatchTag ==
-  is(state) =>
+  models(state) =>
     transitionQueueMatchesShape(state, expectedElementKinds)
 
 theSameChordOrStrengthWasPressed(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ isTheSameChordOrStrength(pressedParamButtonId, state.transitionQueue[
          3
        ].asset)
@@ -31,10 +29,10 @@ theSameChordOrStrengthWasPressed(pressedParamButtonId) ==
 \* `middle`, which is a SHORT-fading element, not a long-fading one. The model
 \* keeps the code as-is; `TransitionQueueShapesMatchTags` is what objects.
 theSamePatternWasPressed_incomingFadeInIsStillRevocable(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ isTheSamePattern(pressedParamButtonId, state.transitionQueue[3].asset)
   /\ state' =
-       PatternPatternSilenceTransitionState(<< state.transitionQueue[1],
+       PatternPatternSilenceTransitionState!make(<< state.transitionQueue[1],
             state.transitionQueue[2]
          >>, state.transitionQueue[3].asset.chord, state.transitionQueue[
            3
@@ -42,34 +40,34 @@ theSamePatternWasPressed_incomingFadeInIsStillRevocable(pressedParamButtonId) ==
 
 \* "a 4th input" -> die
 theSamePatternWasPressed_incomingFadeInIsNoLongerRevocable_EffectDie(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ isTheSamePattern(pressedParamButtonId, state.transitionQueue[3].asset)
-  /\ state' = Defect
+  /\ state' = DefectState!make
 
 \* "a 4th input" -> die
 theSamePatternWasNotPressed_incomingFadeInIsNoLongerRevocable_EffectDie(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ thePressChangesTheSoundingAsset(pressedParamButtonId, state.transitionQueue[
          3
        ].asset)
-  /\ state' = Defect
+  /\ state' = DefectState!make
 
 theSamePatternWasNotPressed_incomingFadeInIsStillRevocable(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ thePressChangesTheSoundingAsset(pressedParamButtonId, state.transitionQueue[
          3
        ].asset)
   /\ state' =
-       PatternPatternPatternTransitionState(<< state.transitionQueue[1],
+       PatternPatternPatternTransitionState!make(<< state.transitionQueue[1],
             state.transitionQueue[2],
             IncomingPatternFadingIn(makePatchedFrom(state.transitionQueue[3].asset, pressedParamButtonId))
          >>)
 
 getNewCleanedUpState(cleanupEvent) ==
   /\ cleanupEvent.kind = EventKinds.cleanup
-  /\ is(state)
+  /\ models(state)
   /\ state' =
-       PatternPatternTransitionState(<< state.transitionQueue[2],
+       PatternPatternTransitionState!make(<< state.transitionQueue[2],
             state.transitionQueue[3]
          >>)
 ====

@@ -3,23 +3,21 @@
 \* PatternState.advance  (Machine/Pattern⏳.ts)
 \* ---------------------------------------------------------------------------
 EXTENDS Base,
+        States,
         PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern,
         PatternPlaybackAtItsLastPlayWithScheduledLongFadeout,
-        IncomingPatternFadingIn,
-        PatternState,
-        PatternPatternTransitionState,
-        PatternSilenceTransitionState
+        IncomingPatternFadingIn
 
 \* Machine/Pattern⏳.ts: PatternQueue = Schema.Tuple([PatternPlayback]).
 expectedElementKinds == << Element.PatternPlayback >>
 
-is(s) == isInState(PatternTag, s)
+models(s) == isInState(PatternState!Tag, s)
 
 transitionQueueShapesMatchTag ==
-  is(state) => transitionQueueMatchesShape(state, expectedElementKinds)
+  models(state) => transitionQueueMatchesShape(state, expectedElementKinds)
 
 theSameChordOrStrengthWasPressed(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ isTheSameChordOrStrength(pressedParamButtonId, state.transitionQueue[
          1
        ].asset)
@@ -27,22 +25,22 @@ theSameChordOrStrengthWasPressed(pressedParamButtonId) ==
 
 \* Same pattern pressed again -> fade what is sounding to silence.
 theSamePatternWasPressed(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ isTheSamePattern(pressedParamButtonId, state.transitionQueue[1].asset)
   /\ state' =
-       PatternSilenceTransitionState(<< PatternPlaybackAtItsLastPlayWithScheduledLongFadeout(state.transitionQueue[
+       PatternSilenceTransitionState!make(<< PatternPlaybackAtItsLastPlayWithScheduledLongFadeout(state.transitionQueue[
                 1
               ].asset)
          >>)
 
 \* Any other press -> short crossfade into the patched asset.
 theSamePatternWasNotPressed(pressedParamButtonId) ==
-  /\ is(state)
+  /\ models(state)
   /\ thePressChangesTheSoundingAsset(pressedParamButtonId, state.transitionQueue[
          1
        ].asset)
   /\ state' =
-       PatternPatternTransitionState(<< PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern(state.transitionQueue[
+       PatternPatternTransitionState!make(<< PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern(state.transitionQueue[
                 1
               ].asset),
             IncomingPatternFadingIn(makePatchedFrom(state.transitionQueue[1].asset, pressedParamButtonId))
@@ -50,6 +48,6 @@ theSamePatternWasNotPressed(pressedParamButtonId) ==
 
 getNewCleanedUpState(cleanupEvent) ==
   /\ cleanupEvent.kind = EventKinds.cleanup
-  /\ is(state)
+  /\ models(state)
   /\ UNCHANGED state
 ====

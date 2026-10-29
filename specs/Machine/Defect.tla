@@ -1,11 +1,12 @@
 ---- MODULE Defect ----
-\* The model-only terminal variant. There are no branches: nothing transitions
-\* out of it, and the queue is dropped when the playback dies.
-EXTENDS Base
+\* The model-only terminal variant. No action transitions out of it; the only
+\* thing this file owns is the state predicate and the empty queue shape.
+EXTENDS Base, States
 
-DefectTag == "defect"
+expectedElementKinds == <<>>
 
-isDefect(s) == isInState(DefectTag, s)
+models(s) == isInState(DefectState!Tag, s)
 
-Defect == StateRecord(DefectTag, <<>>, noStoredSelection, noStoredSelection)
+transitionQueueShapesMatchTag ==
+  models(state) => transitionQueueMatchesShape(state, expectedElementKinds)
 ====

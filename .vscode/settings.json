@@ -1,4 +1,10 @@
 {
 	"tlaplus.tlc.modelChecker.options": "-workers 16 -coverage 1",
-	"tlaplus.moduleSearchPaths": ["specs/Machine", "specs/Elements"]
+	"tlaplus.moduleSearchPaths": [
+		"Machine",
+		"Elements",
+		"../Machine",
+		"../Elements",
+		"../"
+	]
 }

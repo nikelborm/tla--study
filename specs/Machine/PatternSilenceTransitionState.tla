@@ -4,8 +4,8 @@
 \* produce it.
 EXTENDS Base
 
-PatternSilenceTransitionTag == "PatternSilenceTransitionState"
+Tag == "PatternSilenceTransitionState"
 
-PatternSilenceTransitionState(transitionQueue) ==
-  StateRecord(PatternSilenceTransitionTag, transitionQueue, noStoredSelection, noStoredSelection)
+make(transitionQueue) ==
+  StateRecord(Tag, transitionQueue, noStoredSelection, noStoredSelection)
 ====

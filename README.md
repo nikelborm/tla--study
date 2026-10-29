@@ -97,7 +97,7 @@ class names verbatim, element kinds are the class names from `Elements/`, and ac
 | `PatternPatternSilenceTransitionState_*` | `PatternPatternSilenceTransition.advance` |
 | `<StateClassName>_advance` | that class's `advance` |
 | `GetNewCleanedUpState(cleanupEvent)` → `GetNewCleanedUpStateOn<StateClassName>` | `getNewCleanedUpState` — one leaf per `if` in it |
-| `state' = Defect` | `Effect.die(...)` |
+| `state' = DefectState!make` | `Effect.die(...)` |
 | `theSameChordOrStrengthWasPressed`, `theSamePatternWasPressed` | `helpers/theSameWasPressed.ts` |
 | `makePatchedFrom` | `TaggedPatternPointer.makePatchedFrom` |
 | `TaggedPatternPointer_makeSimple` | `TaggedPatternPointer.makeSimple` |
@@ -132,7 +132,7 @@ Deliberate abstractions, all written down at the top of the file:
     timing rules to find out
 - **Cleanup may arrive at any moment** instead of at `fadeoutEnds + buffer`. Same
   trade: coarsest possible over-approximation.
-- **Death is a tag, not a flag.** `Effect.die` sets `state' = Defect`,
+- **Death is a tag, not a flag.** `Effect.die` sets `state' = DefectState!make`,
   so every `advance` branch disables itself the moment the fiber dies (none of them match
   that tag) and one `StuttersAfterEffectDie` action carries the machine forever. That is
   why no branch in the spec is littered with guards. It also dropped the state count
