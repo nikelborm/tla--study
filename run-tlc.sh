@@ -15,4 +15,6 @@ cd "$(dirname "$0")"
 # Elements/ are added here by hand.
 exec java -XX:+UseParallelGC \
   -cp .tools/tla2tools.jar:specs/Machine:specs/Elements \
-  tlc2.TLC -metadir /tmp/tla-study-states -workers 16 "$@"
+  tlc2.TLC -metadir /tmp/tla-study-states -workers 6 "$@"
+
+# with bench discovered that on my laptop after 6, there's no benefit

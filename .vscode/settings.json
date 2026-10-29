@@ -1,5 +1,6 @@
 {
-	"tlaplus.tlc.modelChecker.options": "-workers 16 -coverage 1",
+	// with bench discovered that on my laptop after 6, there's no benefit
+	"tlaplus.tlc.modelChecker.options": "-workers 6 -coverage 1",
 	"tlaplus.moduleSearchPaths": [
 		"Machine",
 		"Elements",
