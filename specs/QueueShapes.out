@@ -2,90 +2,655 @@
 TLC2 Version 2026.10.28.014557 (rev: 56d37a9)
 @!@!@ENDMSG 2262 @!@!@
 @!@!@STARTMSG 2187:0 @!@!@
-Running breadth-first search Model-Checking with fp 94 and seed 1133160287155480758 with 1 worker on 16 cores with 3070MB heap and 64MB offheap memory [pid: 86024] (Linux 7.2.11-arch1-1 amd64, Arch Linux 17.0.21.0.3 64bit, MSBDiskFPSet, DiskStateQueue).
+Running breadth-first search Model-Checking with fp 85 and seed -9151964740789793008 with 6 workers on 16 cores with 3070MB heap and 64MB offheap memory [pid: 195066] (Linux 7.2.11-arch1-1 amd64, Arch Linux 17.0.21.0.3 64bit, MSBDiskFPSet, DiskStateQueue).
 @!@!@ENDMSG 2187 @!@!@
 @!@!@STARTMSG 2220:0 @!@!@
 Starting SANY...
 @!@!@ENDMSG 2220 @!@!@
 Parsing file /home/evadev/projects/tla+-study/specs/QueueShapes.tla
-Parsing file /tmp/tlc-13273731923370526635/Naturals.tla (jar:file:/home/nikel/.vscode/extensions/tlaplus.vscode-ide-2026.10.280155/tools/tla2tools.jar!/tla2sany/StandardModules/Naturals.tla)
-Parsing file /tmp/tlc-13273731923370526635/Sequences.tla (jar:file:/home/nikel/.vscode/extensions/tlaplus.vscode-ide-2026.10.280155/tools/tla2tools.jar!/tla2sany/StandardModules/Sequences.tla)
-Parsing file /tmp/tlc-13273731923370526635/TLC.tla (jar:file:/home/nikel/.vscode/extensions/tlaplus.vscode-ide-2026.10.280155/tools/tla2tools.jar!/tla2sany/StandardModules/TLC.tla)
-Parsing file /tmp/tlc-13273731923370526635/_TLCTrace.tla (jar:file:/home/nikel/.vscode/extensions/tlaplus.vscode-ide-2026.10.280155/tools/tla2tools.jar!/tla2sany/StandardModules/_TLCTrace.tla)
-Parsing file /tmp/tlc-13273731923370526635/FiniteSets.tla (jar:file:/home/nikel/.vscode/extensions/tlaplus.vscode-ide-2026.10.280155/tools/tla2tools.jar!/tla2sany/StandardModules/FiniteSets.tla)
-Parsing file /tmp/tlc-13273731923370526635/TLCExt.tla (jar:file:/home/nikel/.vscode/extensions/tlaplus.vscode-ide-2026.10.280155/tools/tla2tools.jar!/tla2sany/StandardModules/TLCExt.tla)
-Parsing file /tmp/tlc-13273731923370526635/Integers.tla (jar:file:/home/nikel/.vscode/extensions/tlaplus.vscode-ide-2026.10.280155/tools/tla2tools.jar!/tla2sany/StandardModules/Integers.tla)
+Parsing file /tmp/tlc-1477526726889263831/Naturals.tla (jar:file:/home/nikel/.vscode/extensions/tlaplus.vscode-ide-2026.10.280155/tools/tla2tools.jar!/tla2sany/StandardModules/Naturals.tla)
+Parsing file /tmp/tlc-1477526726889263831/Sequences.tla (jar:file:/home/nikel/.vscode/extensions/tlaplus.vscode-ide-2026.10.280155/tools/tla2tools.jar!/tla2sany/StandardModules/Sequences.tla)
+Parsing file /tmp/tlc-1477526726889263831/TLC.tla (jar:file:/home/nikel/.vscode/extensions/tlaplus.vscode-ide-2026.10.280155/tools/tla2tools.jar!/tla2sany/StandardModules/TLC.tla)
+Parsing file /home/evadev/projects/tla+-study/specs/Base.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/States.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Elements/Elements.tla
+Parsing file /tmp/tlc-1477526726889263831/_TLCTrace.tla (jar:file:/home/nikel/.vscode/extensions/tlaplus.vscode-ide-2026.10.280155/tools/tla2tools.jar!/tla2sany/StandardModules/_TLCTrace.tla)
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/Silence.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/Pattern.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/SlowStrum.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/Defect.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/PatternPatternTransition.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/PatternSilencePatternTransition.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/PatternPatternPatternTransition.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/PatternSilenceTransition.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/PatternPatternSilenceTransition.tla
+Parsing file /tmp/tlc-1477526726889263831/FiniteSets.tla (jar:file:/home/nikel/.vscode/extensions/tlaplus.vscode-ide-2026.10.280155/tools/tla2tools.jar!/tla2sany/StandardModules/FiniteSets.tla)
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/DefectState.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/PatternState.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/SlowStrumState.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/PatternPatternTransitionState.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/PatternSilenceTransitionState.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/PatternPatternPatternTransitionState.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/PatternPatternSilenceTransitionState.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/PatternSilencePatternTransitionState.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Machine/SilenceState.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Elements/PatternPlayback.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Elements/PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Elements/PatternPlaybackAtItsLastPlayWithScheduledLongFadeout.tla
+Parsing file /home/evadev/projects/tla+-study/specs/Elements/IncomingPatternFadingIn.tla
+Parsing file /tmp/tlc-1477526726889263831/TLCExt.tla (jar:file:/home/nikel/.vscode/extensions/tlaplus.vscode-ide-2026.10.280155/tools/tla2tools.jar!/tla2sany/StandardModules/TLCExt.tla)
+Parsing file /tmp/tlc-1477526726889263831/Integers.tla (jar:file:/home/nikel/.vscode/extensions/tlaplus.vscode-ide-2026.10.280155/tools/tla2tools.jar!/tla2sany/StandardModules/Integers.tla)
 Semantic processing of module Naturals
 Semantic processing of module Sequences
 Semantic processing of module FiniteSets
 Semantic processing of module TLC
+Semantic processing of module Base
+Semantic processing of module DefectState
+Semantic processing of module PatternState
+Semantic processing of module SlowStrumState
+Semantic processing of module PatternPatternTransitionState
+Semantic processing of module PatternSilenceTransitionState
+Semantic processing of module PatternPatternPatternTransitionState
+Semantic processing of module PatternPatternSilenceTransitionState
+Semantic processing of module PatternSilencePatternTransitionState
+Semantic processing of module SilenceState
+Semantic processing of module States
+Semantic processing of module PatternPlayback
+Semantic processing of module PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern
+Semantic processing of module PatternPlaybackAtItsLastPlayWithScheduledLongFadeout
+Semantic processing of module IncomingPatternFadingIn
+Semantic processing of module Elements
 Semantic processing of module Integers
 Semantic processing of module TLCExt
 Semantic processing of module _TLCTrace
+Semantic processing of module Silence
+Semantic processing of module Pattern
+Semantic processing of module SlowStrum
+Semantic processing of module Defect
+Semantic processing of module PatternPatternTransition
+Semantic processing of module PatternSilencePatternTransition
+Semantic processing of module PatternPatternPatternTransition
+Semantic processing of module PatternSilenceTransition
+Semantic processing of module PatternPatternSilenceTransition
 Semantic processing of module QueueShapes
+Linting of module Base
+Linting of module DefectState
+Linting of module PatternState
+Linting of module SlowStrumState
+Linting of module PatternPatternTransitionState
+Linting of module PatternSilenceTransitionState
+Linting of module PatternPatternPatternTransitionState
+Linting of module PatternPatternSilenceTransitionState
+Linting of module PatternSilencePatternTransitionState
+Linting of module SilenceState
+Linting of module States
+Linting of module PatternPlayback
+Linting of module PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern
+Linting of module PatternPlaybackAtItsLastPlayWithScheduledLongFadeout
+Linting of module IncomingPatternFadingIn
+Linting of module Elements
 Linting of module TLCExt
 Linting of module _TLCTrace
+Linting of module Silence
+Linting of module Pattern
+Linting of module SlowStrum
+Linting of module Defect
+Linting of module PatternPatternTransition
+Linting of module PatternSilencePatternTransition
+Linting of module PatternPatternPatternTransition
+Linting of module PatternSilenceTransition
+Linting of module PatternPatternSilenceTransition
 Linting of module QueueShapes
-line 84, col 5 to line 84, col 10 of module QueueShapes
-
-The field name "Defect" in the record constructor is identical to the existing definition or declaration
-named Defect, located at line 227, col 1 to line 227, col 79 of module QueueShapes.
-The field in the record will not take the value of the Defect definition or declaration.
-In TLA+, field names in records are strings, regardless of any similarly named declarations or definitions.
-Therefore, DOMAIN [Defect |-> ...] = {"Defect"} holds true.
-
-
-
-line 88, col 5 to line 88, col 19 of module QueueShapes
-
-The field name "PatternPlayback" in the record constructor is identical to the existing definition or declaration
-named PatternPlayback, located at line 173, col 1 to line 173, col 79 of module QueueShapes.
-The field in the record will not take the value of the PatternPlayback definition or declaration.
-In TLA+, field names in records are strings, regardless of any similarly named declarations or definitions.
-Therefore, DOMAIN [PatternPlayback |-> ...] = {"PatternPlayback"} holds true.
-
-
-
-line 89, col 5 to line 89, col 64 of module QueueShapes
-
-The field name "PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern" in the record constructor is identical to the existing definition or declaration
-named PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern, located at line 175, col 1 to line 179, col 3 of module QueueShapes.
-The field in the record will not take the value of the PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern definition or declaration.
-In TLA+, field names in records are strings, regardless of any similarly named declarations or definitions.
-Therefore, DOMAIN [PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern |-> ...] = {"PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern"} holds true.
-
-
-
-line 91, col 5 to line 91, col 56 of module QueueShapes
-
-The field name "PatternPlaybackAtItsLastPlayWithScheduledLongFadeout" in the record constructor is identical to the existing definition or declaration
-named PatternPlaybackAtItsLastPlayWithScheduledLongFadeout, located at line 181, col 1 to line 184, col 3 of module QueueShapes.
-The field in the record will not take the value of the PatternPlaybackAtItsLastPlayWithScheduledLongFadeout definition or declaration.
-In TLA+, field names in records are strings, regardless of any similarly named declarations or definitions.
-Therefore, DOMAIN [PatternPlaybackAtItsLastPlayWithScheduledLongFadeout |-> ...] = {"PatternPlaybackAtItsLastPlayWithScheduledLongFadeout"} holds true.
-
-
-
-line 93, col 5 to line 93, col 27 of module QueueShapes
-
-The field name "IncomingPatternFadingIn" in the record constructor is identical to the existing definition or declaration
-named IncomingPatternFadingIn, located at line 186, col 1 to line 187, col 63 of module QueueShapes.
-The field in the record will not take the value of the IncomingPatternFadingIn definition or declaration.
-In TLA+, field names in records are strings, regardless of any similarly named declarations or definitions.
-Therefore, DOMAIN [IncomingPatternFadingIn |-> ...] = {"IncomingPatternFadingIn"} holds true.
-
-
-
 @!@!@STARTMSG 2219:0 @!@!@
 SANY finished.
 @!@!@ENDMSG 2219 @!@!@
 @!@!@STARTMSG 2185:0 @!@!@
-Starting... (2026-10-29 20:28:55)
+Starting... (2026-10-30 02:18:41)
 @!@!@ENDMSG 2185 @!@!@
-@!@!@STARTMSG 2229:1 @!@!@
-The name Spec specified in the configuration file
-is not defined in the specification.
-@!@!@ENDMSG 2229 @!@!@
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2190:0 @!@!@
+Finished computing initial states: 1 distinct state generated at 2026-10-30 02:18:41.
+@!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(8) at 2026-10-30 02:18:44: 576,040 states generated (576,040 s/min), 63,980 distinct states found (63,980 ds/min), 34,074 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2193:0 @!@!@
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 2.2E-8
+  based on the actual fingerprints:  val = 3.7E-8
+@!@!@ENDMSG 2193 @!@!@
+@!@!@STARTMSG 2201:0 @!@!@
+The coverage statistics at 2026-10-30 02:18:52 (see https://explain.tlapl.us/module-coverage-statistics for how to interpret the following statistics).
+@!@!@ENDMSG 2201 @!@!@
+@!@!@STARTMSG 2779:0 @!@!@
+<state line 165, col 10 to line 165, col 14 of module Base>: 162930
+@!@!@ENDMSG 2779 @!@!@
+@!@!@STARTMSG 2773:0 @!@!@
+<Init line 57, col 1 to line 57, col 4 of module QueueShapes>: 1:1
+@!@!@ENDMSG 2773 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 57, col 9 to line 57, col 84 of module QueueShapes: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<Silence!onPattern line 47, col 1 to line 47, col 7 of module QueueShapes>: 12:48
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 47, col 1 to line 47, col 27 of module QueueShapes: 1648259
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 153, col 22 to line 153, col 32 of module Base: 1648211
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 153, col 22 to line 153, col 26 of module Base: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 153, col 30 to line 153, col 32 of module Base: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 10, col 24 to line 10, col 39 of module Silence: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 10, col 42 to line 10, col 42 of module Silence: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 16, col 13 to line 16, col 17 of module Silence: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 17, col 6 to line 17, col 51 of module Silence: 180
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 17, col 6 to line 17, col 30 of module Silence: 132
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 17, col 34 to line 17, col 51 of module Silence: 132
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 18, col 6 to line 20, col 12 of module Silence: 48
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<Pattern!theSameChordOrStrengthWasPressed line 48, col 1 to line 48, col 7 of module QueueShapes>: 0:96
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 48, col 1 to line 48, col 27 of module QueueShapes: 1648499
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 153, col 22 to line 153, col 32 of module Base: 1648259
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 153, col 22 to line 153, col 26 of module Base: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 153, col 30 to line 153, col 32 of module Base: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 10, col 24 to line 10, col 39 of module Pattern: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 10, col 42 to line 10, col 42 of module Pattern: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 16, col 13 to line 16, col 17 of module Pattern: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 107, col 6 to line 107, col 49 of module Base: 576
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 107, col 6 to line 107, col 30 of module Base: 528
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 107, col 34 to line 107, col 49 of module Base: 528
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 108, col 8 to line 108, col 47 of module Base: 240
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 108, col 8 to line 108, col 33 of module Base: 192
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 108, col 37 to line 108, col 47 of module Base: 192
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 109, col 6 to line 109, col 52 of module Base: 576
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 109, col 6 to line 109, col 30 of module Base: 528
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 109, col 34 to line 109, col 52 of module Base: 528
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 110, col 8 to line 110, col 50 of module Base: 192
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 110, col 8 to line 110, col 33 of module Base: 144
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 110, col 37 to line 110, col 50 of module Base: 144
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 17, col 31 to line 17, col 50 of module Pattern: 528
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 17, col 53 to line 19, col 14 of module Pattern: 336
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 20, col 6 to line 20, col 20 of module Pattern: 96
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<SlowStrum!advance_EffectDie line 49, col 1 to line 49, col 9 of module QueueShapes>: 1:132
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 49, col 1 to line 49, col 31 of module QueueShapes: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 49, col 1 to line 49, col 31 of module QueueShapes: 132
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 153, col 22 to line 153, col 32 of module Base: 1648295
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 153, col 22 to line 153, col 26 of module Base: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 153, col 30 to line 153, col 32 of module Base: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 10, col 24 to line 10, col 41 of module SlowStrum: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 10, col 44 to line 10, col 44 of module SlowStrum: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 17, col 13 to line 17, col 17 of module SlowStrum: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 18, col 6 to line 18, col 30 of module SlowStrum: 132
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<PatternPatternTransition!theSameChordOrStrengthWasPressed line 51, col 1 to line 51, col 24 of module QueueShapes>: 0:4608
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 51, col 1 to line 51, col 61 of module QueueShapes: 1664291
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 153, col 22 to line 153, col 32 of module Base: 1652771
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 153, col 22 to line 153, col 26 of module Base: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 153, col 30 to line 153, col 32 of module Base: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 17, col 24 to line 17, col 56 of module PatternPatternTransition: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 17, col 59 to line 17, col 59 of module PatternPatternTransition: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 24, col 13 to line 24, col 17 of module PatternPatternTransition: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 107, col 6 to line 107, col 49 of module Base: 27648
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 107, col 6 to line 107, col 30 of module Base: 25344
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 107, col 34 to line 107, col 49 of module Base: 25344
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 108, col 8 to line 108, col 47 of module Base: 11520
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 108, col 8 to line 108, col 33 of module Base: 9216
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 108, col 37 to line 108, col 47 of module Base: 9216
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 109, col 6 to line 109, col 52 of module Base: 27648
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 109, col 6 to line 109, col 30 of module Base: 25344
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 109, col 34 to line 109, col 52 of module Base: 25344
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 110, col 8 to line 110, col 50 of module Base: 9216
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 110, col 8 to line 110, col 33 of module Base: 6912
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 110, col 37 to line 110, col 50 of module Base: 6912
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 25, col 31 to line 25, col 50 of module PatternPatternTransition: 25344
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 25, col 53 to line 27, col 14 of module PatternPatternTransition: 16128
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 28, col 6 to line 28, col 20 of module PatternPatternTransition: 4608
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<PatternSilencePatternTransition!theSameChordOrStrengthWasPressed line 52, col 1 to line 52, col 31 of module QueueShapes>: 0:4512
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 52, col 1 to line 52, col 75 of module QueueShapes: 1663955
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 153, col 22 to line 153, col 32 of module Base: 1652675
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 153, col 22 to line 153, col 26 of module Base: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 153, col 30 to line 153, col 32 of module Base: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 14, col 24 to line 14, col 63 of module PatternSilencePatternTransition: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 14, col 66 to line 14, col 66 of module PatternSilencePatternTransition: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 21, col 13 to line 21, col 17 of module PatternSilencePatternTransition: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 107, col 6 to line 107, col 49 of module Base: 27072
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 107, col 6 to line 107, col 30 of module Base: 24816
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 107, col 34 to line 107, col 49 of module Base: 24816
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 108, col 8 to line 108, col 47 of module Base: 11280
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 108, col 8 to line 108, col 33 of module Base: 9024
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 108, col 37 to line 108, col 47 of module Base: 9024
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 109, col 6 to line 109, col 52 of module Base: 27072
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 109, col 6 to line 109, col 30 of module Base: 24816
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 109, col 34 to line 109, col 52 of module Base: 24816
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 110, col 8 to line 110, col 50 of module Base: 9024
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 110, col 8 to line 110, col 33 of module Base: 6768
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 110, col 37 to line 110, col 50 of module Base: 6768
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 22, col 31 to line 22, col 50 of module PatternSilencePatternTransition: 24816
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 22, col 53 to line 24, col 14 of module PatternSilencePatternTransition: 15792
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 25, col 6 to line 25, col 20 of module PatternSilencePatternTransition: 4512
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<PatternPatternPatternTransition!theSameChordOrStrengthWasPressed line 53, col 1 to line 53, col 31 of module QueueShapes>: 0:221184
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 53, col 1 to line 53, col 75 of module QueueShapes: 2422307
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 153, col 22 to line 153, col 32 of module Base: 1869347
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 153, col 22 to line 153, col 26 of module Base: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 153, col 30 to line 153, col 32 of module Base: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 13, col 24 to line 13, col 63 of module PatternPatternPatternTransition: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 13, col 66 to line 13, col 66 of module PatternPatternPatternTransition: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 20, col 13 to line 20, col 17 of module PatternPatternPatternTransition: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 107, col 6 to line 107, col 49 of module Base: 1327104
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 107, col 6 to line 107, col 30 of module Base: 1216512
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 107, col 34 to line 107, col 49 of module Base: 1216512
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 108, col 8 to line 108, col 47 of module Base: 552960
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 108, col 8 to line 108, col 33 of module Base: 442368
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 108, col 37 to line 108, col 47 of module Base: 442368
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 109, col 6 to line 109, col 52 of module Base: 1327104
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 109, col 6 to line 109, col 30 of module Base: 1216512
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 109, col 34 to line 109, col 52 of module Base: 1216512
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 110, col 8 to line 110, col 50 of module Base: 442368
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 110, col 8 to line 110, col 33 of module Base: 331776
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 110, col 37 to line 110, col 50 of module Base: 331776
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 21, col 31 to line 21, col 50 of module PatternPatternPatternTransition: 1216512
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 21, col 53 to line 23, col 14 of module PatternPatternPatternTransition: 774144
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 24, col 6 to line 24, col 20 of module PatternPatternPatternTransition: 221184
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<PatternSilenceTransition!theSameChordOrStrengthWasPressed line 54, col 1 to line 54, col 24 of module QueueShapes>: 0:96
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 54, col 1 to line 54, col 61 of module QueueShapes: 1648499
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 153, col 22 to line 153, col 32 of module Base: 1648259
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 153, col 22 to line 153, col 26 of module Base: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 153, col 30 to line 153, col 32 of module Base: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 12, col 24 to line 12, col 56 of module PatternSilenceTransition: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 12, col 59 to line 12, col 59 of module PatternSilenceTransition: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 19, col 13 to line 19, col 17 of module PatternSilenceTransition: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 107, col 6 to line 107, col 49 of module Base: 576
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 107, col 6 to line 107, col 30 of module Base: 528
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 107, col 34 to line 107, col 49 of module Base: 528
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 108, col 8 to line 108, col 47 of module Base: 240
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 108, col 8 to line 108, col 33 of module Base: 192
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 108, col 37 to line 108, col 47 of module Base: 192
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 109, col 6 to line 109, col 52 of module Base: 576
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 109, col 6 to line 109, col 30 of module Base: 528
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 109, col 34 to line 109, col 52 of module Base: 528
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 110, col 8 to line 110, col 50 of module Base: 192
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 110, col 8 to line 110, col 33 of module Base: 144
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 110, col 37 to line 110, col 50 of module Base: 144
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 20, col 31 to line 20, col 50 of module PatternSilenceTransition: 528
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 20, col 53 to line 22, col 14 of module PatternSilenceTransition: 336
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 23, col 6 to line 23, col 20 of module PatternSilenceTransition: 96
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<PatternPatternSilenceTransition!onStrength line 55, col 1 to line 55, col 31 of module QueueShapes>: 6052:103680
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 55, col 1 to line 55, col 75 of module QueueShapes: 1855523
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 153, col 22 to line 153, col 32 of module Base: 1751843
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 153, col 22 to line 153, col 26 of module Base: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 153, col 30 to line 153, col 32 of module Base: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 12, col 24 to line 12, col 63 of module PatternPatternSilenceTransition: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 12, col 66 to line 12, col 66 of module PatternPatternSilenceTransition: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 19, col 13 to line 19, col 17 of module PatternPatternSilenceTransition: 1648163
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 20, col 6 to line 20, col 52 of module PatternPatternSilenceTransition: 483840
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 20, col 6 to line 20, col 30 of module PatternPatternSilenceTransition: 380160
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 20, col 34 to line 20, col 52 of module PatternPatternSilenceTransition: 380160
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 21, col 6 to line 22, col 112 of module PatternPatternSilenceTransition: 103680
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<StuttersAfterEffectDie line 62, col 1 to line 62, col 22 of module QueueShapes>: 0:1
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 153, col 22 to line 153, col 32 of module Base: 149834
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 153, col 22 to line 153, col 26 of module Base: 149833
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 153, col 30 to line 153, col 32 of module Base: 149833
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 8, col 24 to line 8, col 38 of module Defect: 149833
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 8, col 41 to line 8, col 41 of module Defect: 149833
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 63, col 20 to line 63, col 24 of module QueueShapes: 149833
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 64, col 6 to line 64, col 20 of module QueueShapes: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2774:0 @!@!@
+<TransitionQueueNeverExceedsThree line 164, col 1 to line 164, col 32 of module QueueShapes>
+@!@!@ENDMSG 2774 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 164, col 37 to line 164, col 67 of module QueueShapes: 149833
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2774:0 @!@!@
+<AtMostOneIncomingPatternFadingIn line 143, col 1 to line 143, col 32 of module QueueShapes>
+@!@!@ENDMSG 2774 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 144, col 3 to line 147, col 11 of module QueueShapes: 149833
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 145, col 5 to line 147, col 11 of module QueueShapes: 1151904
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 145, col 5 to line 146, col 64 of module QueueShapes: 1151904
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||line 145, col 5 to line 145, col 60 of module QueueShapes: 1151904
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||line 146, col 9 to line 146, col 64 of module QueueShapes: 340896
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 147, col 7 to line 147, col 11 of module QueueShapes: 115152
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 144, col 15 to line 144, col 45 of module QueueShapes: 149833
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2202:0 @!@!@
+End of statistics.
+@!@!@ENDMSG 2202 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(11) at 2026-10-30 02:18:52: 2,834,018 states generated (14,908,037 s/min), 149,833 distinct states found (788,179 ds/min), 0 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2199:0 @!@!@
+2834018 states generated, 149833 distinct states found, 0 states left on queue.
+@!@!@ENDMSG 2199 @!@!@
+@!@!@STARTMSG 2194:0 @!@!@
+The depth of the complete state graph search is 11.
+@!@!@ENDMSG 2194 @!@!@
+@!@!@STARTMSG 2268:0 @!@!@
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 15 and the 95th percentile is 6).
+@!@!@ENDMSG 2268 @!@!@
 @!@!@STARTMSG 2186:0 @!@!@
-Finished in 322ms at (2026-10-29 20:28:56)
+Finished in 11410ms at (2026-10-30 02:18:52)
 @!@!@ENDMSG 2186 @!@!@
