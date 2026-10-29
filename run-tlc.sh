@@ -8,7 +8,11 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-# tla2tools.jar is built for Java 11+. Java 8 is installed system-wide and will
-# NOT work, hence the explicit path above.
-exec java -XX:+UseParallelGC -cp .tools/tla2tools.jar \
+# tla2tools.jar needs Java 11+. Whatever `java` resolves to must be that new.
+#
+# TLA+ finds modules by file name on the search path. The directory of the root
+# module (specs/) is searched implicitly; subdirectories are not, so Machine/ and
+# Elements/ are added here by hand.
+exec java -XX:+UseParallelGC \
+  -cp .tools/tla2tools.jar:specs/Machine:specs/Elements \
   tlc2.TLC -metadir /tmp/tla-study-states -workers 16 "$@"
