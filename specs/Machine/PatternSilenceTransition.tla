@@ -4,13 +4,10 @@
 \* The split is `now <= patternPlaybackAntialiasingFadeout_STARTS_AT_SECONDS_SinceAudioContextInit
 \* - schedulingSafeBufferInSeconds`. Time is erased, so both sides are branches.
 \* ---------------------------------------------------------------------------
-EXTENDS Base,
-        States,
-        PatternPlayback,
-        IncomingPatternFadingIn
+EXTENDS Base, States, Elements
 
 \* Machine/PatternSilenceTransition.ts: PatternSilenceTransitionQueue.
-expectedElementKinds == << Element.PatternPlaybackAtItsLastPlayWithScheduledLongFadeout >>
+expectedElementKinds == << PatternPlaybackAtItsLastPlayWithScheduledLongFadeout!Tag >>
 
 models(s) == isInState(PatternSilenceTransitionState!Tag, s)
 
@@ -29,7 +26,7 @@ theSamePatternWasPressed_fadingLoopFadeoutIsStillRevocable(pressedParamButtonId)
   /\ models(state)
   /\ isTheSamePattern(pressedParamButtonId, state.transitionQueue[1].asset)
   /\ state' =
-       PatternState!make(<< PatternPlayback(state.transitionQueue[1].asset) >>)
+       PatternState!make(<< PatternPlayback!make(state.transitionQueue[1].asset) >>)
 
 theSamePatternWasPressed_fadingLoopFadeoutIsNoLongerRevocable_EffectDie(pressedParamButtonId) ==
   /\ models(state)
@@ -43,7 +40,7 @@ theSamePatternWasNotPressed(pressedParamButtonId) ==
        ].asset)
   /\ state' =
        PatternSilencePatternTransitionState!make(<< state.transitionQueue[1],
-            IncomingPatternFadingIn(makePatchedFrom(state.transitionQueue[1].asset, pressedParamButtonId))
+            IncomingPatternFadingIn!make(makePatchedFrom(state.transitionQueue[1].asset, pressedParamButtonId))
          >>)
 
 getNewCleanedUpState(cleanupEvent) ==

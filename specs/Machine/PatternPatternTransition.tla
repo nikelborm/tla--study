@@ -7,17 +7,12 @@
 \* here, so both variants of the split are present as separate branches and the
 \* model may take either.
 \* ---------------------------------------------------------------------------
-EXTENDS Base,
-        States,
-        PatternPlayback,
-        PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern,
-        PatternPlaybackAtItsLastPlayWithScheduledLongFadeout,
-        IncomingPatternFadingIn
+EXTENDS Base, States, Elements
 
 \* Machine/PatternPatternTransition⏳.ts: PatternPatternTransitionQueue.
 expectedElementKinds ==
-  << Element.PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern,
-     Element.IncomingPatternFadingIn >>
+  << PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern!Tag,
+     IncomingPatternFadingIn!Tag >>
 
 models(s) == isInState(PatternPatternTransitionState!Tag, s)
 
@@ -36,7 +31,7 @@ whenFadingOutPlaybackIsStillSafeToRevive_onPressedThePatternOfTheIncomingOne(pre
   /\ models(state)
   /\ isTheSamePattern(pressedParamButtonId, state.transitionQueue[2].asset)
   /\ state' =
-       PatternSilenceTransitionState!make(<< PatternPlaybackAtItsLastPlayWithScheduledLongFadeout(state.transitionQueue[
+       PatternSilenceTransitionState!make(<< PatternPlaybackAtItsLastPlayWithScheduledLongFadeout!make(state.transitionQueue[
                 1
               ].asset)
          >>)
@@ -49,7 +44,7 @@ whenFadingOutPlaybackIsStillSafeToRevive_onFadingOutAssetBroughtBack(pressedPara
   /\ makePatchedFrom(state.transitionQueue[2].asset, pressedParamButtonId) =
        state.transitionQueue[1].asset
   /\ state' =
-       PatternState!make(<< PatternPlayback(state.transitionQueue[1].asset) >>)
+       PatternState!make(<< PatternPlayback!make(state.transitionQueue[1].asset) >>)
 
 whenFadingOutPlaybackIsStillSafeToRevive_onPressedAnyOtherPattern(pressedParamButtonId) ==
   /\ models(state)
@@ -60,7 +55,7 @@ whenFadingOutPlaybackIsStillSafeToRevive_onPressedAnyOtherPattern(pressedParamBu
        state.transitionQueue[1].asset
   /\ state' =
        PatternPatternTransitionState!make(<< state.transitionQueue[1],
-            IncomingPatternFadingIn(makePatchedFrom(state.transitionQueue[2].asset, pressedParamButtonId))
+            IncomingPatternFadingIn!make(makePatchedFrom(state.transitionQueue[2].asset, pressedParamButtonId))
          >>)
 
 whenFadingOutPlaybackIsUnsafeToRevive_onPressedThePatternOfTheIncomingOne(pressedParamButtonId) ==
@@ -68,7 +63,7 @@ whenFadingOutPlaybackIsUnsafeToRevive_onPressedThePatternOfTheIncomingOne(presse
   /\ isTheSamePattern(pressedParamButtonId, state.transitionQueue[2].asset)
   /\ state' =
        PatternPatternSilenceTransitionState!make(<< state.transitionQueue[1],
-            PatternPlaybackAtItsLastPlayWithScheduledLongFadeout(state.transitionQueue[
+            PatternPlaybackAtItsLastPlayWithScheduledLongFadeout!make(state.transitionQueue[
                 2
               ].asset)
          >>, state.transitionQueue[2].asset.chord, state.transitionQueue[
@@ -82,15 +77,15 @@ whenFadingOutPlaybackIsUnsafeToRevive_onPressedAnyOtherPattern(pressedParamButto
        ].asset)
   /\ state' =
        PatternPatternPatternTransitionState!make(<< state.transitionQueue[1],
-            PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern(state.transitionQueue[
+            PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern!make(state.transitionQueue[
                 2
               ].asset),
-            IncomingPatternFadingIn(makePatchedFrom(state.transitionQueue[2].asset, pressedParamButtonId))
+            IncomingPatternFadingIn!make(makePatchedFrom(state.transitionQueue[2].asset, pressedParamButtonId))
          >>)
 
 getNewCleanedUpState(cleanupEvent) ==
   /\ cleanupEvent.kind = EventKinds.cleanup
   /\ models(state)
   /\ state' =
-       PatternState!make(<< PatternPlayback(state.transitionQueue[2].asset) >>)
+       PatternState!make(<< PatternPlayback!make(state.transitionQueue[2].asset) >>)
 ====

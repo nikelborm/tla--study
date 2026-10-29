@@ -2,7 +2,7 @@
 \* ---------------------------------------------------------------------------
 \* SilenceState.advance  (Machine/Silence🏁.ts)
 \* ---------------------------------------------------------------------------
-EXTENDS Base, States, PatternPlayback
+EXTENDS Base, States, Elements
 
 \* Machine/Silence🏁.ts: SilenceQueue = Schema.Tuple([]).
 expectedElementKinds == <<>>
@@ -16,7 +16,7 @@ onPattern(pressedParamButtonId) ==
   /\ models(state)
   /\ pressedParamButtonId.kind = EventKinds.pattern
   /\ state' =
-       PatternState!make(<< PatternPlayback(TaggedPatternPointer_makeSimple(pressedParamButtonId.value, state.chord, state.strength))
+       PatternState!make(<< PatternPlayback!make(TaggedPatternPointer_makeSimple(pressedParamButtonId.value, state.chord, state.strength))
          >>)
 
 onChord(pressedParamButtonId) ==

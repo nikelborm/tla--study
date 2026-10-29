@@ -2,16 +2,12 @@
 \* ---------------------------------------------------------------------------
 \* PatternPatternSilenceTransitionState.advance  (Machine/PatternPatternSilenceTransition.ts)
 \* ---------------------------------------------------------------------------
-EXTENDS Base,
-        States,
-        PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern,
-        PatternPlaybackAtItsLastPlayWithScheduledLongFadeout,
-        IncomingPatternFadingIn
+EXTENDS Base, States, Elements
 
 \* Machine/PatternPatternSilenceTransition.ts: PatternPatternSilenceTransitionQueue.
 expectedElementKinds ==
-  << Element.PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern,
-     Element.PatternPlaybackAtItsLastPlayWithScheduledLongFadeout >>
+  << PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern!Tag,
+     PatternPlaybackAtItsLastPlayWithScheduledLongFadeout!Tag >>
 
 models(s) == isInState(PatternPatternSilenceTransitionState!Tag, s)
 
@@ -35,17 +31,17 @@ onPattern(pressedParamButtonId) ==
   /\ pressedParamButtonId.kind = EventKinds.pattern
   /\ state' =
        PatternPatternPatternTransitionState!make(<< state.transitionQueue[1],
-            PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern(state.transitionQueue[
+            PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern!make(state.transitionQueue[
                 2
               ].asset),
-            IncomingPatternFadingIn(TaggedPatternPointer_makeSimple(pressedParamButtonId.value, state.chord, state.strength))
+            IncomingPatternFadingIn!make(TaggedPatternPointer_makeSimple(pressedParamButtonId.value, state.chord, state.strength))
          >>)
 
 getNewCleanedUpState(cleanupEvent) ==
   /\ cleanupEvent.kind = EventKinds.cleanup
   /\ models(state)
   /\ state' =
-       PatternSilenceTransitionState!make(<< PatternPlaybackAtItsLastPlayWithScheduledLongFadeout(state.transitionQueue[
+       PatternSilenceTransitionState!make(<< PatternPlaybackAtItsLastPlayWithScheduledLongFadeout!make(state.transitionQueue[
                 2
               ].asset)
          >>)

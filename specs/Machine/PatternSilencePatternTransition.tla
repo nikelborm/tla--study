@@ -4,17 +4,12 @@
 \* The split is `now <= patternPlaybackAntialiasingFadein_STARTS_AT_SECONDS_SinceAudioContextInit
 \* - schedulingSafeBufferInSeconds`. Time is erased, so both sides are branches.
 \* ---------------------------------------------------------------------------
-EXTENDS Base,
-        States,
-        PatternPlayback,
-        PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern,
-        PatternPlaybackAtItsLastPlayWithScheduledLongFadeout,
-        IncomingPatternFadingIn
+EXTENDS Base, States, Elements
 
 \* Machine/PatternSilencePatternTransition.ts: PatternSilencePatternTransitionQueue.
 expectedElementKinds ==
-  << Element.PatternPlaybackAtItsLastPlayWithScheduledLongFadeout,
-     Element.IncomingPatternFadingIn >>
+  << PatternPlaybackAtItsLastPlayWithScheduledLongFadeout!Tag,
+     IncomingPatternFadingIn!Tag >>
 
 models(s) == isInState(PatternSilencePatternTransitionState!Tag, s)
 
@@ -33,7 +28,7 @@ theSamePatternWasPressed_incomingFadeInIsStillRevocable(pressedParamButtonId) ==
   /\ models(state)
   /\ isTheSamePattern(pressedParamButtonId, state.transitionQueue[2].asset)
   /\ state' =
-       PatternSilenceTransitionState!make(<< PatternPlaybackAtItsLastPlayWithScheduledLongFadeout(state.transitionQueue[
+       PatternSilenceTransitionState!make(<< PatternPlaybackAtItsLastPlayWithScheduledLongFadeout!make(state.transitionQueue[
                 1
               ].asset)
          >>)
@@ -46,16 +41,16 @@ theSamePatternWasNotPressed_desiredAssetIsTheDyingOne(pressedParamButtonId) ==
   /\ makePatchedFrom(state.transitionQueue[2].asset, pressedParamButtonId) =
        state.transitionQueue[1].asset
   /\ state' =
-       PatternState!make(<< PatternPlayback(state.transitionQueue[1].asset) >>)
+       PatternState!make(<< PatternPlayback!make(state.transitionQueue[1].asset) >>)
 
 theSamePatternWasPressed_incomingFadeInIsNoLongerRevocable(pressedParamButtonId) ==
   /\ models(state)
   /\ isTheSamePattern(pressedParamButtonId, state.transitionQueue[2].asset)
   /\ state' =
-       PatternPatternSilenceTransitionState!make(<< PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern(state.transitionQueue[
+       PatternPatternSilenceTransitionState!make(<< PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern!make(state.transitionQueue[
                 1
               ].asset),
-            PatternPlaybackAtItsLastPlayWithScheduledLongFadeout(state.transitionQueue[
+            PatternPlaybackAtItsLastPlayWithScheduledLongFadeout!make(state.transitionQueue[
                 2
               ].asset)
          >>, state.transitionQueue[2].asset.chord, state.transitionQueue[
@@ -70,13 +65,13 @@ theSamePatternWasNotPressed_incomingFadeInIsNoLongerRevocable(pressedParamButton
   /\ makePatchedFrom(state.transitionQueue[2].asset, pressedParamButtonId) #
        state.transitionQueue[1].asset
   /\ state' =
-       PatternPatternPatternTransitionState!make(<< PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern(state.transitionQueue[
+       PatternPatternPatternTransitionState!make(<< PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern!make(state.transitionQueue[
                 1
               ].asset),
-            PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern(state.transitionQueue[
+            PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern!make(state.transitionQueue[
                 2
               ].asset),
-            IncomingPatternFadingIn(makePatchedFrom(state.transitionQueue[2].asset, pressedParamButtonId))
+            IncomingPatternFadingIn!make(makePatchedFrom(state.transitionQueue[2].asset, pressedParamButtonId))
          >>)
 
 theSamePatternWasNotPressed_incomingFadeInIsStillRevocable(pressedParamButtonId) ==
@@ -87,15 +82,15 @@ theSamePatternWasNotPressed_incomingFadeInIsStillRevocable(pressedParamButtonId)
   /\ makePatchedFrom(state.transitionQueue[2].asset, pressedParamButtonId) #
        state.transitionQueue[1].asset
   /\ state' =
-       PatternSilencePatternTransitionState!make(<< PatternPlaybackAtItsLastPlayWithScheduledLongFadeout(state.transitionQueue[
+       PatternSilencePatternTransitionState!make(<< PatternPlaybackAtItsLastPlayWithScheduledLongFadeout!make(state.transitionQueue[
                 1
               ].asset),
-            IncomingPatternFadingIn(makePatchedFrom(state.transitionQueue[2].asset, pressedParamButtonId))
+            IncomingPatternFadingIn!make(makePatchedFrom(state.transitionQueue[2].asset, pressedParamButtonId))
          >>)
 
 getNewCleanedUpState(cleanupEvent) ==
   /\ cleanupEvent.kind = EventKinds.cleanup
   /\ models(state)
   /\ state' =
-       PatternState!make(<< PatternPlayback(state.transitionQueue[2].asset) >>)
+       PatternState!make(<< PatternPlayback!make(state.transitionQueue[2].asset) >>)
 ====

@@ -41,10 +41,15 @@ Chords == { "c1", "c2", "c3", "c4" }
 Strengths == { "s1", "s2", "s3" }
 
 \* ---------------------------------------------------------------------------
-\* String constants. Every element kind the machine compares against lives here
-\* exactly once — use this record, never a string literal. A typo in a field
-\* name (e.g. Element.IncomingPayternFadingIn) fails loudly instead of
-\* silently comparing false the way a misspelled literal would.
+\* String constants. Every string that is neither a state tag nor an element tag
+\* lives here exactly once — use this record, never a string literal. A typo in a
+\* field name (e.g. EventKinds.patern) fails loudly instead of silently comparing
+\* false the way a misspelled literal would.
+\*
+\* Element tags live with their element variant: Elements/<X>.tla exports `Tag`
+\* next to the `make` constructor that stamps it. Elements/Elements.tla
+\* instantiates every element variant once, and a file that needs one `EXTENDS
+\* Elements` to reach it as `X!Tag`, `X!make(...)`.
 \*
 \* State tags are also strings, but each one lives with its state variant:
 \* Machine/<X>State.tla exports `Tag` next to the `make` constructor that stamps
@@ -55,15 +60,6 @@ Strengths == { "s1", "s2", "s3" }
 \* state modules themselves would flatten them into one namespace, which is what
 \* the old `<X>Tag` prefixes were working around.)
 \* ---------------------------------------------------------------------------
-Element ==
-  [ PatternPlayback |-> "PatternPlayback",
-    PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern |->
-      "PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern",
-    PatternPlaybackAtItsLastPlayWithScheduledLongFadeout |->
-      "PatternPlaybackAtItsLastPlayWithScheduledLongFadeout",
-    IncomingPatternFadingIn |-> "IncomingPatternFadingIn"
-  ]
-
 EventKinds ==
   [ pattern |-> "pattern",
     chord |-> "chord",
@@ -134,9 +130,9 @@ makePatchedFrom(asset, pressedParamButtonId) ==
   [] OTHER-> [asset EXCEPT !.strength = pressedParamButtonId.value]
 
 
-\* Queue elements. `kind` is the element class, spelled exactly like the class in
-\* Elements/, and `asset` is what it wraps. The constructors themselves are one
-\* per file in Elements/.
+\* Queue elements. `kind` is the element tag from Elements/<X>.tla, spelled
+\* exactly like the class, and `asset` is what it wraps. The constructors
+\* themselves are one per file in Elements/, called `make`.
 StateRecord(tag, transitionQueue, chord, strength) ==
   [ tag |-> tag,
     transitionQueue |-> transitionQueue,
@@ -148,11 +144,15 @@ StateRecord(tag, transitionQueue, chord, strength) ==
 \* queue". Only SilenceState and PatternPatternSilenceTransitionState store it.
 noStoredSelection == "noStoredSelection"
 
-\* The one way to ask "is this state in that variant?". Each Machine/<X>State.tla
-\* exports `Tag`, each branch file binds it once as `models(s)` through the
-\* instance from States -- `isInState(PatternSilenceTransitionState!Tag, s)` --
-\* and nothing else compares `state.tag` by hand.
+\* The one way to ask "is this state / queue element in that variant?". Each
+\* Machine/<X>State.tla and Elements/<X>.tla exports `Tag`, each branch / element
+\* file binds it once as `models(...)` through the instance from States / Elements
+\* -- `isInState(PatternSilenceTransitionState!Tag, s)`,
+\* `isInElement(IncomingPatternFadingIn!Tag, element)` -- and nothing else
+\* compares `state.tag` or `element.kind` by hand.
 isInState(tag, s) == s.tag = tag
+
+isInElement(tag, element) == element.kind = tag
 
 
 \* `StateRecord` is the one place the record shape is written down. Each state

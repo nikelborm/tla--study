@@ -36,14 +36,14 @@
 
   Run it:  ./run-tlc.sh specs/QueueShapes.tla -config specs/QueueShapes.cfg
 *)
-EXTENDS Naturals, Sequences, TLC, Base, States
+EXTENDS Naturals, Sequences, TLC, Base, States, Elements
 
 \* One instance per branch module. State variants live in Machine/States.tla and
-\* arrive here through `EXTENDS States`; their instance names are the namespace,
-\* which is what lets the branch files call a tag `Tag` and a constructor `make`
-\* instead of `<State>Tag` and `<State>(...)`. No Machine/ file declares a
-\* variable of its own -- they all EXTEND Base, so every instance binds the same
-\* `state`.
+\* element variants in Elements/Elements.tla; both arrive here through `EXTENDS`,
+\* and their instance names are the namespace, which is what lets the branch files
+\* call a tag `Tag` and a constructor `make` instead of `<State>Tag` and
+\* `<State>(...)`. No Machine/ file declares a variable of its own -- they all
+\* EXTEND Base, so every instance binds the same `state`.
 Silence == INSTANCE Silence
 Pattern == INSTANCE Pattern
 SlowStrum == INSTANCE SlowStrum
@@ -142,8 +142,8 @@ NeverReachedEffectDie == ~Defect!models(state)
 \* little it takes to add a question.
 AtMostOneIncomingPatternFadingIn ==
   \A i, j \in 1 .. Len(state.transitionQueue):
-    state.transitionQueue[i].kind = Element.IncomingPatternFadingIn /\
-        state.transitionQueue[j].kind = Element.IncomingPatternFadingIn =>
+    IncomingPatternFadingIn!models(state.transitionQueue[i]) /\
+        IncomingPatternFadingIn!models(state.transitionQueue[j]) =>
       i = j
 
 \* Each Machine/ file owns the Schema.Tuple of its state: "if the machine is in

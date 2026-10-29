@@ -152,8 +152,8 @@ Deliberate abstractions, all written down at the top of the file:
    \* "At most one element of the transitionQueue is fading in at any moment."
    AtMostOneIncomingPatternFadingIn ==
      \A i, j \in 1..Len(state.transitionQueue) :
-       state.transitionQueue[i].kind = ElementKinds.IncomingPatternFadingIn /\
-       state.transitionQueue[j].kind = ElementKinds.IncomingPatternFadingIn => i = j
+       IncomingPatternFadingIn!models(state.transitionQueue[i]) /\
+       IncomingPatternFadingIn!models(state.transitionQueue[j]) => i = j
    ```
 
 2. Add its name under `INVARIANTS` in a `.cfg` file (copy one of the `finding-*` ones).

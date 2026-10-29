@@ -2,14 +2,10 @@
 \* ---------------------------------------------------------------------------
 \* PatternState.advance  (Machine/Pattern⏳.ts)
 \* ---------------------------------------------------------------------------
-EXTENDS Base,
-        States,
-        PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern,
-        PatternPlaybackAtItsLastPlayWithScheduledLongFadeout,
-        IncomingPatternFadingIn
+EXTENDS Base, States, Elements
 
 \* Machine/Pattern⏳.ts: PatternQueue = Schema.Tuple([PatternPlayback]).
-expectedElementKinds == << Element.PatternPlayback >>
+expectedElementKinds == << PatternPlayback!Tag >>
 
 models(s) == isInState(PatternState!Tag, s)
 
@@ -28,7 +24,7 @@ theSamePatternWasPressed(pressedParamButtonId) ==
   /\ models(state)
   /\ isTheSamePattern(pressedParamButtonId, state.transitionQueue[1].asset)
   /\ state' =
-       PatternSilenceTransitionState!make(<< PatternPlaybackAtItsLastPlayWithScheduledLongFadeout(state.transitionQueue[
+       PatternSilenceTransitionState!make(<< PatternPlaybackAtItsLastPlayWithScheduledLongFadeout!make(state.transitionQueue[
                 1
               ].asset)
          >>)
@@ -40,10 +36,10 @@ theSamePatternWasNotPressed(pressedParamButtonId) ==
          1
        ].asset)
   /\ state' =
-       PatternPatternTransitionState!make(<< PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern(state.transitionQueue[
+       PatternPatternTransitionState!make(<< PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern!make(state.transitionQueue[
                 1
               ].asset),
-            IncomingPatternFadingIn(makePatchedFrom(state.transitionQueue[1].asset, pressedParamButtonId))
+            IncomingPatternFadingIn!make(makePatchedFrom(state.transitionQueue[1].asset, pressedParamButtonId))
          >>)
 
 getNewCleanedUpState(cleanupEvent) ==

@@ -2,15 +2,13 @@
 \* ---------------------------------------------------------------------------
 \* PatternPatternPatternTransitionState.advance  (Machine/PatternPatternPatternTransition.ts)
 \* ---------------------------------------------------------------------------
-EXTENDS Base,
-        States,
-        IncomingPatternFadingIn
+EXTENDS Base, States, Elements
 
 \* Machine/PatternPatternPatternTransition.ts: PatternPatternPatternTransitionQueue.
 expectedElementKinds ==
-  << Element.PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern,
-     Element.PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern,
-     Element.IncomingPatternFadingIn >>
+  << PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern!Tag,
+     PatternPlaybackScheduledWithShortFadeoutBeforeAnotherPattern!Tag,
+     IncomingPatternFadingIn!Tag >>
 
 models(s) == isInState(PatternPatternPatternTransitionState!Tag, s)
 
@@ -60,7 +58,7 @@ theSamePatternWasNotPressed_incomingFadeInIsStillRevocable(pressedParamButtonId)
   /\ state' =
        PatternPatternPatternTransitionState!make(<< state.transitionQueue[1],
             state.transitionQueue[2],
-            IncomingPatternFadingIn(makePatchedFrom(state.transitionQueue[3].asset, pressedParamButtonId))
+            IncomingPatternFadingIn!make(makePatchedFrom(state.transitionQueue[3].asset, pressedParamButtonId))
          >>)
 
 getNewCleanedUpState(cleanupEvent) ==
